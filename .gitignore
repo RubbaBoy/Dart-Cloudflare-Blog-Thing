@@ -1,0 +1,17 @@
+/target
+/dist
+**/*.rs.bk
+Cargo.lock
+bin/
+pkg/
+wasm-pack.log
+worker/
+node_modules/
+.cargo-ok
+
+.idea
+index.js*
+wrangler.toml
+.packages
+package-lock.json
+pubspec.lock
