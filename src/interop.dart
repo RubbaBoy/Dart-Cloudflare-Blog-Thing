@@ -22,7 +22,9 @@ class JSResponse {
 class FetchEvent {
   external JSRequest get request;
 
+  external void passThroughOnException();
   external void respondWith(Promise<JSResponse> r);
+  external void waitUntil(Promise<JSResponse> r);
 }
 
 @JS()
