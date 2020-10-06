@@ -5,6 +5,7 @@ import 'safe_response.dart';
 class RequestManager {
   static const EMPTY_ENTRY = MapEntry(null, null);
   final Map<String, RouteHandle> handles = {};
+  RouteHandle defaultHandle;
 
   /// Adds a route to redirect to.
   ///
@@ -23,7 +24,10 @@ class RequestManager {
   void addRoute(String route, RouteHandle handle) =>
       handles[route.substring(1)] = handle;
 
-  Future<JSResponse> request(JSRequest request) {
+  void addDefaultRoute(RouteHandle handle) =>
+      defaultHandle = handle;
+
+  Future<JSResponse> request(JSRequest request) async {
     var requestSplit = request.url.split('/').skip(3).toList();
     if (requestSplit.last == '') {
       requestSplit.removeLast();
@@ -48,10 +52,10 @@ class RequestManager {
 
       return MapEntry(out, entry.value);
     }).firstWhere((entry) => entry.value != null,
-            orElse: () => EMPTY_ENTRY);
+            orElse: () => MapEntry(requestSplit, defaultHandle));
 
     if (handleEntry.key == null) {
-      return Future.value(Response('Bad request!', MimeType.HTML, status: 400).toJS());
+      return Response('Bad request!', mime: MimeType.HTML, status: 400).toJS();
     }
 
     return handleEntry.value

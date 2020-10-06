@@ -1,5 +1,10 @@
 name: hello_workers
+
+environment:
+  sdk: '>=2.9.0 <3.0.0'
+
 dependencies:
   js: 0.6.2
-  html: ^0.14.0+3
+  html: ^0.14.0+4
   http: ^0.12.2
+  markdown: ^2.1.8

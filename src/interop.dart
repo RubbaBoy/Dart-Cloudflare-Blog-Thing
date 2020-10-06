@@ -1,5 +1,5 @@
 import 'package:js/js.dart';
-import 'package:js/js_util.dart' as js;
+import 'package:js/js_util.dart';
 
 @JS('console.log')
 external void log(String foo);
@@ -14,7 +14,7 @@ class JSRequest {
 class JSResponse {
   external factory JSResponse(String body, Object init);
 
-  external String text();
+  external Promise<String> text();
   external Headers get headers;
 }
 
@@ -53,7 +53,7 @@ class Promise<T> {
 external void addEventListener(String type, void Function(FetchEvent event));
 
 Object mapToJSObj(Map<dynamic, dynamic> a) {
-  var object = js.newObject();
-  a.forEach((k, v) => js.setProperty(object, k, v));
+  var object = newObject();
+  a.forEach((k, v) => setProperty(object, k, v));
   return object;
 }
