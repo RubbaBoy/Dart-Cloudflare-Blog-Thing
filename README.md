@@ -4,9 +4,11 @@ DCBT is a simple blog engine similar to Jekyll running on Cloudflare Workers, ma
 
 The purpose of DCBT is to take in requests, and combine both HTML and Markdown files on GitHub repositories to output a templated blog. There will probably be some limitations to this in the end, however it should function.
 
+### This project has been abandoned because it is so tedious and literally impossible to do anything with after dozens of hours of development  
+
 Limitations found on Cloudflare Workers with Dart:
 
 - It is impossible to use any HTTP libraries, as when transpiling to JS it must use an `eval` somewhere as all related libraries give errors
 - You cannot use Function.apply() I believe for the same reason
 - You need to wrap JS fetch events for requests which is hard to expand on from scratch. Some documentation on this or examples would be nice (This repo provides a great starting point)
-
+- Many more, some of which I can't find any results on

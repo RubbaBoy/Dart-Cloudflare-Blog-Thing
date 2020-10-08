@@ -59,7 +59,6 @@ class RequestManager {
     }
 
     return handleEntry.value
-        .request(handleEntry.key)
-        .then((value) => value.toJS());
+        .request(handleEntry.key);
   }
 }

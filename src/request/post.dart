@@ -9,12 +9,19 @@ import 'route.dart';
 class PostRoute extends RouteHandle {
 
   @override
-  Future<Response> request(List<String> args) async {
+  Future<JSResponse> request(List<String> args) async {
     final post = args[0];
-    var pageContent = await fetchString('$RAW_URL_PREFIX$CONTENT_REPO/posts/$post.md');
-    var pageHTML = await fetchString('$RAW_URL_PREFIX$TEMPLATE_REPO/post.html');
-    var done = pageHTML.replaceAll('%content%', pageContent);
+    // var pageContent = await fetchString('$RAW_URL_PREFIX$CONTENT_REPO/posts/$post.md');
+    var pageHTML = await fetch('$RAW_URL_PREFIX$TEMPLATE_REPO/post.html');
+    // var done = pageHTML.replaceAll('%content%', pageContent);
 
-    return Response(done, mime: MimeType.HTML);
+    // return HTMLRewriter()
+    //     .on('*', ElementHandler())
+    //     .transform(pageHTML);
+
+    var called = callConstructor('HTMLRewriter', []);
+    print('called = $called is ${called.runtimeType}');
+
+    return Response('done', mime: MimeType.HTML).toJS();
   }
 }

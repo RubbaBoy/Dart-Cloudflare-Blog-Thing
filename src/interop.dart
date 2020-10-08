@@ -1,6 +1,8 @@
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 
+// Appended from bottom
+
 @JS('console.log')
 external void log(String foo);
 
@@ -58,4 +60,26 @@ Object mapToJSObj(Map<dynamic, dynamic> a) {
   var object = newObject();
   a.forEach((k, v) => setProperty(object, k, v));
   return object;
+}
+
+// CF Worker interop
+
+class ElementHandler {
+  void element(dynamic element) {
+    print('Incoming element: $element');
+  }
+
+  void comments(dynamic comment) {
+    print('Comment $comment');
+  }
+
+  void text(dynamic text) {
+    print('text $text');
+  }
+}
+
+@JS()
+class HTMLRewriter {
+  external HTMLRewriter on(String selector, dynamic handler);
+  external JSResponse transform(JSResponse response);
 }
